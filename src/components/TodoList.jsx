@@ -28,12 +28,12 @@ const TodoList = () => {
         body: JSON.stringify({
           todo: newTodo,
           completed: false,
-          userId: 5, // Replace with the appropriate userId
+          userId: 5,
         }),
       });
       const data = await response.json();
       setTodos([...todos, data]);
-      setNewTodo(""); // Clear the input field after adding the todo
+      setNewTodo("");
     } catch (error) {
       console.error("Error adding todo:", error);
     }
