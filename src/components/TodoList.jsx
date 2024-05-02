@@ -18,19 +18,22 @@ const TodoList = () => {
     }
   };
 
-  const addTodo = async (newTodo) => {
+  const addTodo = async () => {
     try {
       const response = await fetch("https://dummyjson.com/todos/add", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          todo: newTodo.todo,
+          todo: newTodo,
           completed: false,
           userId: 5, // Replace with the appropriate userId
         }),
       });
       const data = await response.json();
       setTodos([...todos, data]);
+      setNewTodo(""); // Clear the input field after adding the todo
     } catch (error) {
       console.error("Error adding todo:", error);
     }
@@ -69,7 +72,7 @@ const TodoList = () => {
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Add a new todo"
       />
-      <button onClick={addTodo}>Add</button>
+      <button onClick={() => addTodo()}>Add</button>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
